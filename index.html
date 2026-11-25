@@ -2,7 +2,7 @@
 <html lang="zh-Hant-TW">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>湯凱｜懂轉單的操盤手</title>
 <meta name="description" content="你不缺流量，缺的是接得住客人的系統。從短影音曝光、自動私訊到收單，一整套獲客系統。">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -74,7 +74,7 @@ h3 { font-weight: 700; font-size: 20px; margin: 0 0 6px; line-height: 1.4; }
 @media (max-width: 820px) { .nav-links { display: none; } }
 
 /* 主視覺：全螢幕影片 */
-.hero { min-height: 100svh; display: flex; align-items: flex-end; padding: 0 0 72px; background: var(--dark); color: var(--on-dark); overflow: hidden; }
+.hero { min-height: 100svh; display: flex; align-items: flex-end; padding: 100px 0 72px; background: var(--dark); color: var(--on-dark); overflow: hidden; }
 .hero-bg { position: absolute; inset: 0; z-index: 0; }
 .hero-bg .glow { position: absolute; border-radius: 50%; filter: blur(80px); opacity: .55; animation: float 14s ease-in-out infinite alternate; }
 .hero-bg .g1 { width: 55vw; height: 55vw; background: var(--accent); top: -15vw; right: -10vw; }
@@ -90,12 +90,19 @@ h3 { font-weight: 700; font-size: 20px; margin: 0 0 6px; line-height: 1.4; }
 .hero-tag { display: inline-flex; align-items: center; gap: 8px; border: 1px solid rgba(255,255,255,.25); border-radius: 999px; padding: 7px 16px; font-size: 14px; font-weight: 500; margin-bottom: 26px; background: rgba(255,255,255,.05); backdrop-filter: blur(6px); }
 .hero-tag i { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 4px rgba(255,77,46,.25); animation: pulse 2s infinite; }
 @keyframes pulse { 50% { box-shadow: 0 0 0 9px rgba(255,77,46,0); } }
-.hero h1 { font-weight: 900; font-size: clamp(40px, 8.4vw, 104px); line-height: 1.08; margin: 0; letter-spacing: -.02em; text-wrap: balance; }
+/* 字級同時看螢幕寬和高：矮螢幕（小手機、筆電）不會把標題擠到選單下面 */
+.hero h1 { font-weight: 900; font-size: clamp(34px, min(9.6vw, 10svh), 104px); line-height: 1.08; margin: 0; letter-spacing: -.02em; text-wrap: balance; }
 .hero .lead { color: var(--on-dark-muted); margin-top: 26px; }
 .hero-todo { position: absolute; top: 96px; right: 20px; z-index: 2; font-size: 12px; padding: 8px 12px; border-radius: 10px; background: rgba(11,15,13,.6); color: var(--accent-2); border: 1.5px dashed var(--accent-2); }
 .scroll-hint { position: absolute; right: 20px; bottom: 72px; z-index: 1; font-family: var(--f-en); font-size: 12px; letter-spacing: .2em; color: var(--on-dark-muted); writing-mode: vertical-rl; display: flex; align-items: center; gap: 12px; }
 .scroll-hint::after { content: ""; width: 1px; height: 60px; background: linear-gradient(var(--on-dark-muted), transparent); }
 @media (max-width: 720px) { .scroll-hint { display: none; } .hero { padding-bottom: 110px; } }
+@media (max-height: 720px) {
+  .hero-tag { margin-bottom: 14px; }
+  .hero .lead { margin-top: 14px; font-size: 15px; }
+  .hero .btns { margin-top: 20px; }
+  .hero .btn { padding: 13px 24px; font-size: 16px; }
+}
 
 /* 跑馬燈 */
 .marquee { background: var(--accent); color: #fff; overflow: hidden; padding: 18px 0; white-space: nowrap; }
@@ -241,7 +248,7 @@ footer .wrap { display: flex; justify-content: space-between; gap: 12px; flex-wr
 .float-cta.show { opacity: 1; transform: none; pointer-events: auto; }
 .float-cta .btn { padding: 12px 20px; font-size: 15px; box-shadow: 0 10px 30px -8px rgba(0,0,0,.35); }
 @media (max-width: 720px) {
-  .float-cta { left: 12px; right: 12px; bottom: 12px; flex-direction: row; }
+  .float-cta { left: 12px; right: 12px; bottom: calc(12px + env(safe-area-inset-bottom)); flex-direction: row; }
   .float-cta .btn { flex: 1; padding: 14px 10px; font-size: 16px; }
 }
 </style>
