@@ -1,0 +1,574 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>湯凱｜懂轉單的操盤手</title>
+<meta name="description" content="你不缺流量，缺的是接得住客人的系統。從短影音曝光、自動私訊到收單，一整套獲客系統。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+<script>document.documentElement.classList.add('js')</script>
+<style>
+:root {
+  --bg: #F3F4F2; --surface: #FFFFFF; --ink: #111614; --muted: #5E6A64; --line: #DCE1DE;
+  --dark: #0B0F0D; --dark-2: #151B18; --on-dark: #F1F4F2; --on-dark-muted: #9CA8A2;
+  --accent: #FF4D2E; --accent-2: #FF9F43; --line-green: #06C755;
+  --f-body: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
+  --f-en: "Space Grotesk", "Helvetica Neue", Arial, sans-serif;
+  --r: 20px;
+}
+@media (prefers-color-scheme: dark) {
+  :root { --bg: #0F1412; --surface: #171E1B; --ink: #EEF2F0; --muted: #9AA7A1; --line: #29332F; }
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--f-body); line-height: 1.75; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+a { color: inherit; }
+img, video, iframe { display: block; max-width: 100%; }
+.wrap { max-width: 1160px; margin: 0 auto; padding: 0 20px; }
+section { padding: 110px 0; position: relative; }
+@media (max-width: 720px) { section { padding: 72px 0; } }
+p { margin: 0 0 12px; }
+
+/* 大字英文小標 */
+.kicker { display: flex; align-items: baseline; gap: 16px; margin-bottom: 18px; flex-wrap: wrap; }
+.kicker .en { font-family: var(--f-en); font-weight: 700; font-size: clamp(44px, 8vw, 96px); line-height: .95; letter-spacing: -.03em; }
+.kicker .zh { font-size: 15px; color: var(--muted); font-weight: 500; }
+.kicker .zh::before { content: "— "; color: var(--accent); }
+h2 { font-weight: 900; font-size: clamp(26px, 4vw, 40px); line-height: 1.3; margin: 0 0 16px; text-wrap: balance; }
+h3 { font-weight: 700; font-size: 20px; margin: 0 0 6px; line-height: 1.4; }
+.lead { font-size: clamp(16px, 1.8vw, 19px); color: var(--muted); max-width: 38em; }
+.hl { color: var(--accent); white-space: nowrap; }
+
+/* 進場動畫：沒有 JS 時內容照常顯示 */
+.js .reveal { opacity: 0; transform: translateY(40px); transition: opacity .9s cubic-bezier(.2,.7,.2,1), transform .9s cubic-bezier(.2,.7,.2,1); }
+.js .reveal.in { opacity: 1; transform: none; }
+.js .reveal.d1 { transition-delay: .1s; } .js .reveal.d2 { transition-delay: .2s; } .js .reveal.d3 { transition-delay: .3s; }
+@media (prefers-reduced-motion: reduce) { .js .reveal { opacity: 1; transform: none; transition: none; } * { animation: none !important; } }
+
+/* 按鈕 */
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; padding: 16px 30px; border-radius: 999px; font-weight: 700; font-size: 17px; text-decoration: none; border: 1.5px solid transparent; transition: transform .2s, box-shadow .2s; cursor: pointer; font-family: inherit; }
+.btn:hover { transform: translateY(-3px); }
+.btn-main { background: var(--accent); color: #fff; box-shadow: 0 10px 30px -10px var(--accent); }
+.btn-line { background: var(--line-green); color: #fff; }
+.btn-glass { border-color: rgba(255,255,255,.35); color: #fff; background: rgba(255,255,255,.06); backdrop-filter: blur(8px); }
+.btns { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 34px; }
+
+/* 待補框 */
+.todo { border: 2px dashed var(--accent); border-radius: var(--r); background: color-mix(in srgb, var(--accent) 6%, var(--surface)); color: var(--accent); display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 20px; font-weight: 700; font-size: 15px; }
+.todo small { display: block; font-weight: 400; color: var(--muted); margin-top: 6px; font-size: 13px; }
+
+/* 導覽 */
+.nav { position: fixed; inset: 0 0 auto 0; z-index: 30; transition: background .3s, border-color .3s; border-bottom: 1px solid transparent; }
+.nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 72px; }
+.brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: #fff; font-weight: 900; font-size: 19px; }
+.brand-mark { width: 34px; height: 34px; border-radius: 10px; background: linear-gradient(135deg, var(--accent), var(--accent-2)); display: grid; place-items: center; font-family: var(--f-en); font-size: 17px; color: #fff; }
+.brand small { display: block; font-family: var(--f-en); font-weight: 500; font-size: 11px; letter-spacing: .12em; opacity: .7; line-height: 1; margin-top: 3px; }
+.nav-links { display: flex; gap: 28px; font-family: var(--f-en); font-size: 14px; letter-spacing: .06em; }
+.nav-links a { text-decoration: none; color: rgba(255,255,255,.75); }
+.nav-links a:hover { color: #fff; }
+.nav.solid { background: color-mix(in srgb, var(--bg) 85%, transparent); backdrop-filter: blur(14px); border-color: var(--line); }
+.nav.solid .brand, .nav.solid .nav-links a { color: var(--ink); }
+.nav.solid .nav-links a { opacity: .7; }
+@media (max-width: 820px) { .nav-links { display: none; } }
+
+/* 主視覺：全螢幕影片 */
+.hero { min-height: 100svh; display: flex; align-items: flex-end; padding: 0 0 72px; background: var(--dark); color: var(--on-dark); overflow: hidden; }
+.hero-bg { position: absolute; inset: 0; z-index: 0; }
+.hero-bg .glow { position: absolute; border-radius: 50%; filter: blur(80px); opacity: .55; animation: float 14s ease-in-out infinite alternate; }
+.hero-bg .g1 { width: 55vw; height: 55vw; background: var(--accent); top: -15vw; right: -10vw; }
+.hero-bg .g2 { width: 40vw; height: 40vw; background: #2B5BFF; bottom: -20vw; left: -10vw; opacity: .35; animation-duration: 18s; }
+.hero-bg .g3 { width: 25vw; height: 25vw; background: var(--accent-2); top: 30%; left: 40%; opacity: .25; animation-duration: 11s; }
+@keyframes float { to { transform: translate(-6vw, 5vw) scale(1.15); } }
+.wall { position: absolute; inset: -8% -6%; display: grid; grid-template-columns: repeat(6, 1fr); gap: 14px; transform: rotate(-6deg); opacity: .38; }
+.wall video { width: 100%; height: 100%; object-fit: cover; border-radius: 14px; background: var(--dark-2); }
+.wall video:nth-child(even) { transform: translateY(12%); }
+@media (max-width: 720px) { .wall { grid-template-columns: repeat(3, 1fr); inset: -5% -20%; } .wall video:nth-child(n+4) { display: none; } }
+.hero-bg::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(11,15,13,.25) 0%, rgba(11,15,13,.2) 40%, rgba(11,15,13,.92) 100%); }
+.hero .wrap { position: relative; z-index: 1; width: 100%; }
+.hero-tag { display: inline-flex; align-items: center; gap: 8px; border: 1px solid rgba(255,255,255,.25); border-radius: 999px; padding: 7px 16px; font-size: 14px; font-weight: 500; margin-bottom: 26px; background: rgba(255,255,255,.05); backdrop-filter: blur(6px); }
+.hero-tag i { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 4px rgba(255,77,46,.25); animation: pulse 2s infinite; }
+@keyframes pulse { 50% { box-shadow: 0 0 0 9px rgba(255,77,46,0); } }
+.hero h1 { font-weight: 900; font-size: clamp(40px, 8.4vw, 104px); line-height: 1.08; margin: 0; letter-spacing: -.02em; text-wrap: balance; }
+.hero .lead { color: var(--on-dark-muted); margin-top: 26px; }
+.hero-todo { position: absolute; top: 96px; right: 20px; z-index: 2; font-size: 12px; padding: 8px 12px; border-radius: 10px; background: rgba(11,15,13,.6); color: var(--accent-2); border: 1.5px dashed var(--accent-2); }
+.scroll-hint { position: absolute; right: 20px; bottom: 72px; z-index: 1; font-family: var(--f-en); font-size: 12px; letter-spacing: .2em; color: var(--on-dark-muted); writing-mode: vertical-rl; display: flex; align-items: center; gap: 12px; }
+.scroll-hint::after { content: ""; width: 1px; height: 60px; background: linear-gradient(var(--on-dark-muted), transparent); }
+@media (max-width: 720px) { .scroll-hint { display: none; } .hero { padding-bottom: 110px; } }
+
+/* 跑馬燈 */
+.marquee { background: var(--accent); color: #fff; overflow: hidden; padding: 18px 0; white-space: nowrap; }
+.marquee-track { display: inline-flex; gap: 40px; animation: slide 30s linear infinite; font-weight: 900; font-size: clamp(18px, 2.4vw, 26px); }
+.marquee-track span::after { content: "✦"; margin-left: 40px; opacity: .6; }
+@keyframes slide { to { transform: translateX(-50%); } }
+
+/* 數字 */
+.stats { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid var(--line); }
+.stat { padding: 34px 24px 10px 0; border-right: 1px solid var(--line); }
+.stat:last-child { border-right: 0; }
+.stat + .stat { padding-left: 24px; }
+.stat b { display: block; font-family: var(--f-en); font-size: clamp(38px, 5.4vw, 68px); line-height: 1; letter-spacing: -.03em; font-variant-numeric: tabular-nums; }
+.stat b em { font-style: normal; font-size: .42em; font-family: var(--f-body); margin-left: 2px; color: var(--accent); }
+.stat > span { color: var(--muted); font-size: 15px; display: block; margin-top: 12px; }
+@media (max-width: 820px) {
+  .stats { grid-template-columns: repeat(2, 1fr); }
+  .stat, .stat + .stat { padding: 26px 14px 18px; border-right: 0; border-bottom: 1px solid var(--line); }
+  .stat:nth-child(odd) { border-right: 1px solid var(--line); padding-left: 0; }
+}
+
+/* 痛點：深色區 */
+.dark { background: var(--dark); color: var(--on-dark); }
+.dark .lead, .dark .kicker .zh { color: var(--on-dark-muted); }
+.pains { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 48px; }
+.pain { background: var(--dark-2); border: 1px solid rgba(255,255,255,.08); border-radius: var(--r); padding: 32px 28px; position: relative; overflow: hidden; transition: transform .3s, border-color .3s; }
+.pain:hover { transform: translateY(-6px); border-color: rgba(255,77,46,.5); }
+.pain .no { font-family: var(--f-en); font-size: 72px; font-weight: 700; line-height: 1; color: rgba(255,255,255,.06); position: absolute; right: 18px; top: 10px; }
+.pain h3 { font-size: 21px; margin-bottom: 12px; }
+.pain h3::before { content: "「"; color: var(--accent); } .pain h3::after { content: "」"; color: var(--accent); }
+.pain p { color: var(--on-dark-muted); margin: 0; }
+@media (max-width: 820px) { .pains { grid-template-columns: 1fr; } }
+
+/* 系統流程 */
+.flow { margin-top: 56px; display: grid; gap: 0; }
+.step { display: grid; grid-template-columns: 140px 1fr 1.2fr; gap: 32px; align-items: start; padding: 36px 0; border-top: 1px solid var(--line); }
+.step:last-child { border-bottom: 1px solid var(--line); }
+.step .n { font-family: var(--f-en); font-weight: 700; font-size: 64px; line-height: .9; color: transparent; -webkit-text-stroke: 1.5px var(--ink); transition: color .4s; }
+.step:hover .n { color: var(--accent); -webkit-text-stroke-color: var(--accent); }
+.step h3 { font-size: clamp(22px, 2.6vw, 30px); font-weight: 900; }
+.step .en-s { font-family: var(--f-en); font-size: 13px; letter-spacing: .12em; color: var(--accent); display: block; margin-bottom: 6px; }
+.step p { color: var(--muted); margin: 0; font-size: 17px; }
+@media (max-width: 820px) { .step { grid-template-columns: 1fr; gap: 10px; padding: 28px 0; } .step .n { font-size: 48px; } }
+
+/* 案例：左右滑 */
+.cases-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 20px; flex-wrap: wrap; }
+.arrows { display: flex; gap: 10px; }
+.arrow { width: 52px; height: 52px; border-radius: 50%; border: 1.5px solid var(--ink); background: transparent; color: var(--ink); font-size: 20px; cursor: pointer; transition: background .2s, color .2s; }
+.arrow:hover { background: var(--ink); color: var(--bg); }
+.rail { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(300px, 380px); gap: 20px; overflow-x: auto; scroll-snap-type: x mandatory; padding: 40px 20px 20px; margin: 0 -20px; scrollbar-width: none; }
+.rail::-webkit-scrollbar { display: none; }
+.case { scroll-snap-align: start; background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); overflow: hidden; display: flex; flex-direction: column; transition: transform .35s, box-shadow .35s; }
+.case:hover { transform: translateY(-8px); box-shadow: 0 30px 60px -30px rgba(0,0,0,.35); }
+.case-visual { aspect-ratio: 4 / 3.2; position: relative; display: flex; align-items: flex-end; padding: 22px; color: #fff; overflow: hidden; }
+.case-visual::before { content: ""; position: absolute; inset: 0; background: var(--grad); }
+.case-visual::after { content: attr(data-en); position: absolute; right: -10px; top: 6px; font-family: var(--f-en); font-weight: 700; font-size: 80px; line-height: 1; color: rgba(255,255,255,.12); letter-spacing: -.04em; }
+.case-visual .big { position: relative; z-index: 1; font-family: var(--f-en); font-weight: 700; font-size: 58px; line-height: 1; letter-spacing: -.03em; }
+.case-visual .big small { font-family: var(--f-body); font-size: 18px; font-weight: 700; margin-left: 4px; }
+.play { position: absolute; z-index: 2; top: 20px; left: 20px; display: inline-flex; align-items: center; gap: 8px; background: rgba(255,255,255,.18); backdrop-filter: blur(8px); border: 1px solid rgba(255,255,255,.35); color: #fff; border-radius: 999px; padding: 8px 14px 8px 10px; font-size: 14px; font-weight: 700; cursor: pointer; font-family: inherit; }
+.play::before { content: "▶"; font-size: 11px; width: 22px; height: 22px; border-radius: 50%; background: #fff; color: var(--ink); display: grid; place-items: center; padding-left: 2px; }
+.case-body { padding: 22px 24px 26px; }
+.case-body .ind { display: inline-block; font-size: 13px; font-weight: 700; padding: 3px 10px; border-radius: 999px; background: var(--bg); margin-bottom: 10px; }
+.case-body ul { margin: 0; padding-left: 18px; color: var(--muted); font-size: 15px; }
+
+/* 影片彈窗 */
+.modal { position: fixed; inset: 0; z-index: 50; background: rgba(5,8,7,.85); backdrop-filter: blur(6px); display: none; align-items: center; justify-content: center; padding: 20px; }
+.modal.open { display: flex; }
+.modal-box { width: min(400px, 100%); max-height: 90vh; background: #fff; border-radius: 16px; overflow: hidden; position: relative; }
+.modal-box iframe { width: 100%; height: min(720px, 82vh); border: 0; }
+.modal-close { position: absolute; top: 14px; right: 14px; width: 44px; height: 44px; border-radius: 50%; border: 0; background: #fff; font-size: 22px; cursor: pointer; z-index: 2; }
+
+/* Logo 牆 */
+.logos { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 14px; margin-top: 40px; }
+.logo { aspect-ratio: 3 / 2; background: #fff; border: 1px solid var(--line); border-radius: 14px; display: grid; place-items: center; padding: 14px; transition: transform .3s, box-shadow .3s; }
+.logo:hover { transform: translateY(-4px); box-shadow: 0 16px 30px -18px rgba(0,0,0,.3); }
+.logo { position: relative; }
+.logo img { position: absolute; inset: 12px; width: calc(100% - 24px); height: calc(100% - 24px); object-fit: contain; }
+@media (max-width: 820px) { .logos { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+
+/* 好評 */
+.reviews { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 40px; }
+.review { margin: 0; background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); overflow: hidden; display: flex; flex-direction: column; }
+.review figcaption { padding: 24px 24px 18px; }
+.review b { display: block; font-family: var(--f-en); font-size: clamp(30px, 3.4vw, 40px); line-height: 1.1; letter-spacing: -.02em; }
+.review b em { font-style: normal; font-family: var(--f-body); font-size: .45em; color: var(--accent); margin-left: 4px; }
+.review span { display: block; color: var(--muted); font-size: 15px; margin-top: 8px; }
+.review img { width: 100%; margin-top: auto; background: #0B0F0D; }
+@media (max-width: 820px) { .reviews { grid-template-columns: 1fr; } }
+
+/* 方案 */
+.plans { display: grid; grid-template-columns: 1.2fr 1fr 1fr; gap: 18px; margin-top: 48px; }
+.plan { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); padding: 32px 28px; }
+.plan.pick { background: var(--dark); color: var(--on-dark); border-color: var(--dark); position: relative; overflow: hidden; }
+.plan.pick::before { content: ""; position: absolute; width: 260px; height: 260px; border-radius: 50%; background: var(--accent); filter: blur(70px); opacity: .45; top: -120px; right: -80px; }
+.plan.pick > * { position: relative; }
+.plan.pick p, .plan.pick li { color: var(--on-dark-muted); }
+.badge { display: inline-block; background: var(--accent); color: #fff; font-size: 13px; font-weight: 700; padding: 4px 12px; border-radius: 999px; margin-bottom: 14px; }
+.plan h3 { font-size: 24px; font-weight: 900; }
+.plan p { color: var(--muted); }
+.plan ul { margin: 18px 0 0; padding: 0; list-style: none; }
+.plan li { padding: 8px 0 8px 26px; position: relative; color: var(--muted); border-top: 1px solid color-mix(in srgb, currentColor 15%, transparent); }
+.plan li::before { content: "✓"; position: absolute; left: 0; color: var(--accent); font-weight: 900; }
+.promise { margin-top: 18px; border: 1.5px solid var(--accent); border-radius: var(--r); padding: 28px 30px; display: grid; grid-template-columns: auto 1fr; gap: 22px; align-items: center; background: color-mix(in srgb, var(--accent) 5%, var(--surface)); }
+.promise .icon { width: 64px; height: 64px; border-radius: 50%; background: var(--accent); color: #fff; display: grid; place-items: center; font-size: 28px; }
+.promise p { margin: 0; color: var(--muted); }
+@media (max-width: 900px) { .plans { grid-template-columns: 1fr; } .promise { grid-template-columns: 1fr; } }
+
+/* 關於我 */
+.about-grid { display: grid; grid-template-columns: 1fr 1.25fr; gap: 64px; align-items: center; }
+.portrait { margin: 0; position: relative; border-radius: var(--r); overflow: hidden; aspect-ratio: 4 / 5; background: #000; box-shadow: 0 0 0 1px rgba(255,255,255,.08), 0 40px 80px -40px rgba(255,77,46,.45); }
+.portrait img { width: 100%; height: 100%; object-fit: cover; }
+.portrait figcaption { position: absolute; left: 20px; bottom: 18px; font-weight: 900; font-size: 22px; color: #fff; }
+.portrait figcaption span { display: block; font-size: 13px; font-weight: 500; color: var(--accent); letter-spacing: .04em; }
+.about-grid .big-quote { font-size: clamp(22px, 2.6vw, 28px); font-weight: 900; line-height: 1.5; margin: 0 0 22px; padding-left: 20px; border-left: 4px solid var(--accent); }
+.about-grid p { color: var(--muted); font-size: 17px; }
+.own { display: flex; gap: 28px; margin-top: 26px; flex-wrap: wrap; }
+.own b { font-family: var(--f-en); font-size: 36px; display: block; line-height: 1; }
+.own span { font-size: 14px; color: var(--muted); }
+@media (max-width: 820px) { .about-grid { grid-template-columns: 1fr; gap: 32px; } }
+
+/* 常見問題 */
+.faq { max-width: 820px; }
+details { border-top: 1px solid var(--line); padding: 22px 0; }
+details:last-of-type { border-bottom: 1px solid var(--line); }
+summary { font-weight: 700; font-size: 18px; cursor: pointer; list-style: none; display: flex; justify-content: space-between; gap: 16px; }
+summary::-webkit-details-marker { display: none; }
+summary::after { content: "+"; font-family: var(--f-en); color: var(--accent); font-size: 26px; line-height: 1; transition: transform .3s; flex-shrink: 0; }
+details[open] summary::after { transform: rotate(45deg); }
+details p { color: var(--muted); margin: 14px 0 0; }
+
+/* 結尾 */
+.final { background: var(--dark); color: var(--on-dark); text-align: center; overflow: hidden; }
+.final .glow { position: absolute; width: 60vw; height: 60vw; border-radius: 50%; background: var(--accent); filter: blur(120px); opacity: .3; left: 20vw; top: 40%; }
+.final .wrap { position: relative; }
+.final h2 { font-size: clamp(32px, 6vw, 72px); line-height: 1.15; }
+.final .lead { color: var(--on-dark-muted); margin: 0 auto; }
+.final .btns { justify-content: center; }
+footer { background: var(--dark); color: var(--on-dark-muted); padding: 30px 0 100px; font-size: 14px; border-top: 1px solid rgba(255,255,255,.08); }
+footer .wrap { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+
+/* 右下浮動按鈕 */
+.float-cta { position: fixed; right: 20px; bottom: 20px; z-index: 40; display: flex; flex-direction: column; gap: 10px; opacity: 0; transform: translateY(20px); pointer-events: none; transition: .4s; }
+.float-cta.show { opacity: 1; transform: none; pointer-events: auto; }
+.float-cta .btn { padding: 12px 20px; font-size: 15px; box-shadow: 0 10px 30px -8px rgba(0,0,0,.35); }
+@media (max-width: 720px) {
+  .float-cta { left: 12px; right: 12px; bottom: 12px; flex-direction: row; }
+  .float-cta .btn { flex: 1; padding: 14px 10px; font-size: 16px; }
+}
+</style>
+</head>
+<body>
+
+<header class="nav" id="nav">
+  <div class="wrap">
+    <a class="brand" href="#top"><span class="brand-mark">K</span><span>湯凱<small>TANG KAI</small></span></a>
+    <nav class="nav-links">
+      <a href="#system">SYSTEM</a>
+      <a href="#cases">CASES</a>
+      <a href="#plans">PLANS</a>
+      <a href="#about">ABOUT</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+<!-- 主視覺 -->
+<section class="hero">
+  <div class="hero-bg">
+    <span class="glow g1"></span><span class="glow g2"></span><span class="glow g3"></span>
+    <!-- 影片牆：素材/wall1～6，作品集爆款各 5 秒 -->
+    <div class="wall" aria-hidden="true">
+      <video autoplay muted loop playsinline poster="素材/wall1.jpg" src="素材/wall1.mp4"></video>
+      <video autoplay muted loop playsinline poster="素材/wall2.jpg" src="素材/wall2.mp4"></video>
+      <video autoplay muted loop playsinline poster="素材/wall3.jpg" src="素材/wall3.mp4"></video>
+      <video autoplay muted loop playsinline poster="素材/wall4.jpg" src="素材/wall4.mp4"></video>
+      <video autoplay muted loop playsinline poster="素材/wall5.jpg" src="素材/wall5.mp4"></video>
+      <video autoplay muted loop playsinline poster="素材/wall6.jpg" src="素材/wall6.mp4"></video>
+    </div>
+  </div>
+  <div class="wrap">
+    <div class="hero-tag reveal"><i></i>懂轉單的操盤手・湯凱</div>
+    <h1 class="reveal d1">你不缺流量，<br>你缺的是<span class="hl">接得住客人</span><br>的系統。</h1>
+    <p class="lead reveal d2">影片拍了、觀看也有了，訂單卻沒變多？問題不在流量，是流量進來之後沒人接、沒人追、沒人收。我做的是從曝光到收單的一整套獲客系統。</p>
+    <div class="btns reveal d3">
+      <a class="btn btn-main" href="https://wsx78920-wq.github.io/check/">3 分鐘看你漏掉多少客人 →</a>
+      <a class="btn btn-glass" href="#cases">先看案例</a>
+    </div>
+  </div>
+  <div class="scroll-hint">SCROLL</div>
+</section>
+
+<!-- 跑馬燈 -->
+<div class="marquee" aria-hidden="true">
+  <div class="marquee-track">
+    <span>短影音企劃</span><span>現場拍攝剪輯</span><span>留言秒私訊</span><span>24 小時聊天收單</span><span>LINE 名單經營</span><span>廣告投放放大</span>
+    <span>短影音企劃</span><span>現場拍攝剪輯</span><span>留言秒私訊</span><span>24 小時聊天收單</span><span>LINE 名單經營</span><span>廣告投放放大</span>
+  </div>
+</div>
+
+<!-- 數字 -->
+<section>
+  <div class="wrap">
+    <div class="kicker reveal"><span class="en">RESULTS</span><span class="zh">3 年實戰累積</span></div>
+    <div class="stats">
+      <div class="stat reveal"><b><span class="count" data-to="30">0</span><em>組+</em></b><span>合作過的業主</span></div>
+      <div class="stat reveal d1"><b><span class="count" data-to="2600" data-sep="1">0</span><em>萬+</em></b><span>3 個代操帳號三平台累積觀看</span></div>
+      <div class="stat reveal d2"><b><span class="count" data-to="1">0</span><em>萬+</em></b><span>單支影片留下的名單</span></div>
+      <div class="stat reveal d3"><b><span class="count" data-to="100">0</span><em>萬</em></b><span>幫業主變現，從 10 萬做到 100 萬</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- 痛點 -->
+<section class="dark">
+  <div class="wrap">
+    <div class="kicker reveal"><span class="en">PROBLEM</span><span class="zh">你是不是也這樣</span></div>
+    <h2 class="reveal">流量來了，客人卻溜走了。</h2>
+    <p class="lead reveal">這三句話，我幾乎每個老闆都聽過。</p>
+    <div class="pains">
+      <div class="pain reveal"><span class="no">01</span><h3>影片有人看，就是沒人買</h3><p>觀看幾萬，私訊個位數。不是內容不好，是看完之後，觀眾不知道下一步要幹嘛。</p></div>
+      <div class="pain reveal d1"><span class="no">02</span><h3>私訊太多，根本回不完</h3><p>白天忙本業，晚上才回訊息。等你回的時候，客人早就去問別家了。</p></div>
+      <div class="pain reveal d2"><span class="no">03</span><h3>問完價格就沒下文</h3><p>問一次就消失，你也不知道該不該追、怎麼追。名單一直在流失。</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 系統 -->
+<section id="system">
+  <div class="wrap">
+    <div class="kicker reveal"><span class="en">SYSTEM</span><span class="zh">從曝光到收單</span></div>
+    <h2 class="reveal">不是只幫你拍影片，<br>是把整條路接起來。</h2>
+    <div class="flow">
+      <div class="step reveal"><div class="n">01</div><div><span class="en-s">EXPOSURE</span><h3>短影音曝光</h3></div><p>企劃、腳本、拍攝、剪輯一手包。前 3 秒就抓住你要的客人，結尾引導他留言。</p></div>
+      <div class="step reveal"><div class="n">02</div><div><span class="en-s">CAPTURE</span><h3>留言秒私訊</h3></div><p>客人一留言，幾秒內自動私訊，送資料、問需求。半夜留言也不會漏掉。</p></div>
+      <div class="step reveal"><div class="n">03</div><div><span class="en-s">CONVERT</span><h3>24 小時聊天收單</h3></div><p>自動跟客人聊、收集資訊、約時間、主動追蹤。高意向的客人，直接交到你手上。</p></div>
+      <div class="step reveal"><div class="n">04</div><div><span class="en-s">SCALE</span><h3>名單＋廣告放大</h3></div><p>客人變成你自己的 LINE 名單。有效的影片再用廣告放大，把錢花在會買的人身上。</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 案例 -->
+<section id="cases" style="background:var(--surface);border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
+  <div class="wrap">
+    <div class="cases-head">
+      <div>
+        <div class="kicker reveal"><span class="en">CASES</span><span class="zh">實際操盤的帳號</span></div>
+        <p class="lead reveal" style="margin:0">觀看數為 IG、TikTok、FB 三平台合計。點「看影片」直接播放。</p>
+      </div>
+      <div class="arrows reveal"><button class="arrow" data-dir="-1" aria-label="上一個">←</button><button class="arrow" data-dir="1" aria-label="下一個">→</button></div>
+    </div>
+    <div class="rail" id="rail">
+      <article class="case">
+        <div class="case-visual" data-en="CHIRO" style="--grad:linear-gradient(135deg,#FF4D2E,#FF9F43)">
+          <button class="play" data-reel="DQBwAwAAKz_">看影片</button>
+          <div class="big">1,181<small>萬觀看</small></div>
+        </div>
+        <div class="case-body"><span class="ind">中醫整復</span><ul><li>99 支影片，33 支破 10 萬、6 支破 50 萬</li><li>留言區大量「想了解」，直接導進私訊預約</li></ul></div>
+      </article>
+      <article class="case">
+        <div class="case-visual" data-en="HOUSE" style="--grad:linear-gradient(135deg,#1E3A8A,#3B82F6)">
+          <button class="play" data-reel="DTm0DcOk6Ot">看影片</button>
+          <div class="big">872<small>萬觀看</small></div>
+        </div>
+        <div class="case-body"><span class="ind">建設公司</span><ul><li>老闆人生故事＋專業知識雙主軸</li><li>單支最高將近 90 萬觀看</li></ul></div>
+      </article>
+      <article class="case">
+        <div class="case-visual" data-en="BRAND" style="--grad:linear-gradient(135deg,#111614,#3F4A45)">
+          <button class="play" data-reel="Dc-2ENNzzLK">看影片</button>
+          <div class="big">603<small>萬觀看</small></div>
+        </div>
+        <div class="case-body"><span class="ind">個人品牌</span><ul><li>66 支影片，19 支破 10 萬</li><li>IG、TikTok、FB 三個平台同步經營</li></ul></div>
+      </article>
+      <article class="case">
+        <div class="case-visual" data-en="FASHION" style="--grad:linear-gradient(135deg,#7C3AED,#EC4899)">
+          <button class="play" data-reel="DR1lxKSkguW">看影片</button>
+          <div class="big">298<small>萬觀看</small></div>
+        </div>
+        <div class="case-body"><span class="ind">成衣廠</span><ul><li>10 支影片，3 支破 50 萬</li><li>單支最高 87 萬觀看</li></ul></div>
+      </article>
+      <article class="case">
+        <div class="case-visual" data-en="PET" style="--grad:linear-gradient(135deg,#059669,#34D399)">
+          <button class="play" data-reel="DfhTm1nPH7q">看影片</button>
+          <div class="big">100<small>萬+ 觀看</small></div>
+        </div>
+        <div class="case-body"><span class="ind">寵物溝通</span><ul><li>兩支影片累積破百萬</li><li>留言區有人直接問「怎麼聯絡寵物溝通師」</li></ul></div>
+      </article>
+      <article class="case">
+        <div class="case-visual" data-en="LEADS" style="--grad:linear-gradient(135deg,#B45309,#F59E0B)">
+          <div class="big">1.8<small>萬則留言</small></div>
+        </div>
+        <div class="case-body"><span class="ind">代拜服務</span><ul><li>4 支影片加上「留言關鍵字」，1.8 萬人主動舉手</li><li>每一則留言都能接上自動私訊，變成名單</li></ul></div>
+      </article>
+    </div>
+
+    <div class="kicker reveal" style="margin-top:80px"><span class="en" style="font-size:clamp(32px,5vw,56px)">CLIENTS</span><span class="zh">合作過的品牌</span></div>
+    <div class="logos reveal">
+      <div class="logo"><img src="素材/logos/佳芯建設_裁切.jpg" alt="佳芯建設" loading="lazy"></div>
+      <div class="logo"><img src="素材/logos/沐顏醫美.jpg" alt="沐顏醫美" loading="lazy"></div>
+      <div class="logo"><img src="素材/logos/時尚假期.jpg" alt="時尚假期醫美診所" loading="lazy"></div>
+      <div class="logo"><img src="素材/logos/杏芝堂.png" alt="杏芝堂中醫診所" loading="lazy"></div>
+      <div class="logo"><img src="素材/logos/衣哲服飾.png" alt="ICHE 衣哲服飾" loading="lazy"></div>
+      <div class="logo"><img src="素材/logos/強老闆.png" alt="強老闆 新機・福利機・3C 選貨店" loading="lazy"></div>
+    </div>
+  </div>
+</section>
+
+<!-- 好評 -->
+<section>
+  <div class="wrap">
+    <div class="kicker reveal"><span class="en">VOICES</span><span class="zh">客戶怎麼說</span></div>
+    <div class="reviews">
+      <figure class="review reveal">
+        <figcaption><b>5,000<em>+ 人留言</em></b><span>「如果我自己回會死掉」——留言交給自動客服接</span></figcaption>
+        <img src="素材/好評/review1.jpg" alt="客戶訊息：影片留言人數超過 5000 了，如果我自己回會死掉" loading="lazy">
+      </figure>
+      <figure class="review reveal d1">
+        <figcaption><b>2,000 → 5<em>萬觀看</em></b><span>「之前怎麼拍都不超過 2000，你幫我拍第一集就破 5 萬」</span></figcaption>
+        <img src="素材/好評/review2.jpg" alt="客戶訊息：我之前影片怎麼拍流量都不超過 2000，你幫我拍第一集就破 5 萬，才第一天" loading="lazy">
+      </figure>
+      <figure class="review reveal d2">
+        <figcaption><b>20<em>萬營業額</em></b><span>「影片破 10 萬觀看，這個月 20 萬，太感謝你了！」</span></figcaption>
+        <img src="素材/好評/review3.jpg" alt="客戶訊息：我的影片破 10 萬觀看了，這個月營業額 20 萬，太感謝你了" loading="lazy">
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- 方案 -->
+<section id="plans" style="padding-top:0">
+  <div class="wrap">
+    <div class="kicker reveal"><span class="en">PLANS</span><span class="zh">合作方案</span></div>
+    <h2 class="reveal">方案 2 萬起，依你的帳號量身報價。</h2>
+    <p class="lead reveal">每個行業、每個帳號的狀況都不一樣。先做免費健檢，我幫你算過回本，再告訴你哪個方案最划算。</p>
+    <div class="plans">
+      <div class="plan pick reveal">
+        <span class="badge">最多老闆選</span>
+        <h3>完整代操</h3>
+        <p>拍片＋自動接客＋名單，一次到位</p>
+        <ul><li>帳號定位</li><li>每月 4 支現場拍攝短影音</li><li>完整獲客系統建置</li><li>月報＋月會</li></ul>
+      </div>
+      <div class="plan reveal d1">
+        <h3>獲客系統</h3>
+        <p>已經會拍片，只缺接客的人</p>
+        <ul><li>留言自動私訊</li><li>24 小時聊天收單</li><li>月報</li></ul>
+      </div>
+      <div class="plan reveal d2">
+        <h3>加購服務</h3>
+        <p>依需求再加上去</p>
+        <ul><li>LINE 自動客服</li><li>只拍影片（10 支起）</li><li>廣告代操</li></ul>
+      </div>
+    </div>
+    <div class="promise reveal">
+      <div class="icon">🤝</div>
+      <div>
+        <h3>成效保證：沒變多，我免費多做一個月</h3>
+        <p>第 3 個月的有效詢問（問價格、問預約、問細節的私訊）沒有比簽約前 30 天多，我就免費多做 1 個月。帳號、影片、LINE 名單全部歸你。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 關於我 -->
+<section id="about" class="dark">
+  <div class="wrap about-grid">
+    <figure class="portrait reveal"><img src="素材/形象照.jpg" alt="湯凱形象照" loading="lazy"><figcaption>湯凱<span>懂轉單的操盤手</span></figcaption></figure>
+    <div>
+      <div class="kicker reveal"><span class="en">ABOUT</span><span class="zh">關於我</span></div>
+      <p class="big-quote reveal">大部分老闆不是沒流量，<br>是流量來了接不住。</p>
+      <p class="reveal">我是湯凱，做短影音代操 3 年，服務過 30 組以上的業主，從中醫、建設公司、醫美到個人品牌都有。影片爆了、私訊回不完、客人問完就跑，這種事我看太多了。</p>
+      <p class="reveal">所以我不只幫你拍影片，而是把曝光、接客、追蹤、收單整條路接起來。我做事很細，凡事站在你的立場想。適合本業已經穩定、願意配合拍攝、看長期的老闆。</p>
+      <div class="own reveal">
+        <div><b>50.8<span style="font-size:.5em">萬</span></b><span>我自己的口播影片觀看</span></div>
+        <div><b>49.4<span style="font-size:.5em">萬</span></b><span>我自己的故事影片觀看</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 常見問題 -->
+<section id="faq">
+  <div class="wrap faq">
+    <div class="kicker reveal"><span class="en">FAQ</span><span class="zh">你可能想問</span></div>
+    <details class="reveal"><summary>我完全不會拍片，也很怕上鏡頭，可以嗎？</summary><p>可以。腳本我寫、現場我帶，你照著講就好。大部分老闆拍第二次就自然很多了。</p></details>
+    <details class="reveal"><summary>多久會看到效果？</summary><p>一般 1～3 個月會看到有效詢問變多，所以方案 3 個月起簽。第 3 個月沒變多，我免費多做 1 個月。</p></details>
+    <details class="reveal"><summary>自動回覆會不會很像機器人，把客人嚇跑？</summary><p>回覆的內容會照你的說話方式、你的價格和常見問題來設定，上線前會一起測試。遇到要你親自處理的客人，會馬上通知你。</p></details>
+    <details class="reveal"><summary>合作結束後，帳號和名單歸誰？</summary><p>全部歸你。帳號、影片、LINE 名單都是你的。</p></details>
+    <details class="reveal"><summary>什麼樣的老闆不適合？</summary><p>本業還沒穩、只想要一支影片爆紅、或預算低於 2 萬的老闆，我會老實跟你說先不要做。</p></details>
+  </div>
+</section>
+
+<!-- 結尾 -->
+<section class="final">
+  <span class="glow"></span>
+  <div class="wrap">
+    <div class="kicker reveal" style="justify-content:center"><span class="en" style="font-size:clamp(28px,4vw,44px);color:var(--accent)">LET'S TALK</span></div>
+    <h2 class="reveal">先看看你的帳號<br>漏掉多少客人。</h2>
+    <p class="lead reveal">做完 3 分鐘健檢，預約 15～30 分鐘線上諮詢。我先幫你看帳號、算回本，適不適合合作，聊完再決定。</p>
+    <div class="btns reveal">
+      <a class="btn btn-main" href="https://wsx78920-wq.github.io/check/">免費帳號健檢 →</a>
+      <a class="btn btn-line" href="https://line.me/R/ti/p/@420ruvws">加 LINE 直接問</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap"><span>© 2026 湯凱｜從曝光到收單的一整套獲客系統</span><span>TANG KAI</span></div>
+</footer>
+
+<div class="float-cta" id="floatCta">
+  <a class="btn btn-main" href="https://wsx78920-wq.github.io/check/">免費健檢</a>
+  <a class="btn btn-line" href="https://line.me/R/ti/p/@420ruvws">加 LINE</a>
+</div>
+
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-label="案例影片">
+  <div class="modal-box">
+    <button class="modal-close" id="modalClose" aria-label="關閉">×</button>
+    <iframe id="modalFrame" title="案例影片" allow="autoplay; encrypted-media" loading="lazy"></iframe>
+  </div>
+</div>
+
+<script>
+// 導覽列：往下滑變實心；浮動按鈕：滑過主視覺才出現
+const nav = document.getElementById('nav'), floatCta = document.getElementById('floatCta');
+const onScroll = () => {
+  nav.classList.toggle('solid', scrollY > innerHeight * .8);
+  floatCta.classList.toggle('show', scrollY > innerHeight * .6);
+};
+addEventListener('scroll', onScroll, { passive: true }); onScroll();
+
+// 滑到才浮出來＋數字跑動
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (!e.isIntersecting) return;
+    e.target.classList.add('in');
+    e.target.querySelectorAll('.count').forEach(countUp);
+    io.unobserve(e.target);
+  });
+}, { threshold: .15 });
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+function countUp(el) {
+  const to = +el.dataset.to, sep = el.dataset.sep, t0 = performance.now(), dur = 1600;
+  const fmt = n => sep ? n.toLocaleString('en-US') : String(n);
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) { el.textContent = fmt(to); return; }
+  const tick = now => {
+    const p = Math.min((now - t0) / dur, 1), eased = 1 - Math.pow(1 - p, 3);
+    el.textContent = fmt(Math.round(to * eased));
+    if (p < 1) requestAnimationFrame(tick);
+  };
+  requestAnimationFrame(tick);
+}
+
+// 案例左右滑
+const rail = document.getElementById('rail');
+document.querySelectorAll('.arrow').forEach(b => b.addEventListener('click', () => {
+  const card = rail.querySelector('.case');
+  rail.scrollBy({ left: (card.offsetWidth + 20) * +b.dataset.dir, behavior: 'smooth' });
+}));
+
+// 案例影片彈窗（IG 要用 embed 網址才播得出來）
+const modal = document.getElementById('modal'), frame = document.getElementById('modalFrame');
+document.querySelectorAll('.play').forEach(b => b.addEventListener('click', () => {
+  frame.src = 'https:' + '//www.instagram.com/reel/' + b.dataset.reel + '/embed/';
+  modal.classList.add('open'); document.body.style.overflow = 'hidden';
+}));
+const closeModal = () => { modal.classList.remove('open'); frame.src = 'about:blank'; document.body.style.overflow = ''; };
+document.getElementById('modalClose').addEventListener('click', closeModal);
+modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
+addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+</script>
+</body>
+</html>
